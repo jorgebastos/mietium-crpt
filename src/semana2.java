@@ -16,9 +16,9 @@ public class semana2 {
     public static void main(String[] args) {
 
         //final String RC4 = "RC4";
-        Path foriginal = Paths.get("/home/jorge/Área de Trabalho/hellofriend", "foriginal.txt");
-        Path fencriptado = Paths.get("/home/jorge/Área de Trabalho/hellofriend", "fencriptado.txt");
-        Path ffinal = Paths.get("/home/jorge/Área de Trabalho/hellofriend", "ffinal.txt");
+        Path foriginal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "foriginal.txt");
+        Path fencriptado = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "fencriptado.txt");
+        Path ffinal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "ffinal.txt");
 
         KeyGenerator kg = null; // cria instancia do gerador de chaves
         try {
