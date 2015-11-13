@@ -1,4 +1,4 @@
-/**
+package semana2; /**
  * Created by jorge on 30-09-2015.
  */
 import javax.crypto.*;
@@ -17,9 +17,9 @@ public class semana2 {
 
         /*
             Primeira versão. Não utilizava as funções de genkey e readkey
-        Path foriginal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "foriginal.txt");
-        Path fencriptado = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "fencriptado.txt");
-        Path ffinal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2", "ffinal.txt");
+        Path foriginal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2.semana2", "foriginal.txt");
+        Path fencriptado = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2.semana2", "fencriptado.txt");
+        Path ffinal = Paths.get("/home/jorge/Área de Trabalho/hellofriend/semana2.semana2", "ffinal.txt");
 
         KeyGenerator kg = null; // cria instancia do gerador de chaves
         try {
