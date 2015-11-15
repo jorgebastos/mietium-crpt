@@ -16,7 +16,7 @@ import java.net.Socket;
 import java.security.MessageDigest;
 
 public class Cliente {
-    static final String CIPHER_MODE = "AES/CTR/PKCS5Padding" ;
+    static final String CIPHER_MODE = "AES/CTR/NoPadding" ;
     static final String UNSAFE_PASSWORD = "Password!!!";
 
     static public void main(String []args) {

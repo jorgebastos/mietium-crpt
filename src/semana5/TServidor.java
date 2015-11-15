@@ -19,7 +19,7 @@ public class TServidor extends Thread {
     private int ct;
     protected Socket s;
     static final String UNSAFE_PASSWORD = "Password!!!";
-    static final String CIPHER_MODE = "AES/CTR/PKCS5Padding" ;
+    static final String CIPHER_MODE = "AES/CTR/NoPadding" ;
 
     TServidor(Socket s, int c) {
         ct = c;
