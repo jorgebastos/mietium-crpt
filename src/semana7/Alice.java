@@ -22,8 +22,9 @@ public class Alice extends Thread {
     private int ct;
     protected Socket s;
     static final String UNSAFE_PASSWORD = "Password!!!";
-    static final String CIPHER_MODE = "AES/CTR/PKCS5Padding" ;
-        Alice(Socket s, int c) {
+    static final String CIPHER_MODE = "AES/CTR/NoPadding" ;
+
+    Alice(Socket s, int c) {
             ct = c;
             this.s=s;
         }
