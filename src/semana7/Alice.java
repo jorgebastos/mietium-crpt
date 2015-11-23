@@ -45,7 +45,7 @@ public class Alice extends Thread {
                 System.out.println(salice);
 
                 MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-                byte rawbits[] = sha256.digest(UNSAFE_PASSWORD.getBytes("UTF-8"));
+                byte rawbits[] = sha256.digest(salice.toByteArray());
 
                 Cipher c = Cipher.getInstance(CIPHER_MODE);
                 SecretKey key = new SecretKeySpec(rawbits,0,16,"AES");

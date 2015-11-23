@@ -35,14 +35,15 @@ public class Bob {
                 ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
                 BigInteger B = G.modPow(b,P); //calcula B
-                oos.writeObject(B);//envia para a Alice o B
 
                 BigInteger A = (BigInteger) ois.readObject(); //recebe o A da Alice
+                oos.writeObject(B);//envia para a Alice o B
+
                 BigInteger sbob = A.modPow(b,P); // calcula s a partir do B recebido do Bob
                 System.out.println(sbob);
 
                 MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-                byte rawbits[] = sha256.digest(UNSAFE_PASSWORD.getBytes("UTF-8"));
+                byte rawbits[] = sha256.digest(sbob.toByteArray());
 
                 Cipher c = Cipher.getInstance(CIPHER_MODE);
                 SecretKey key = new SecretKeySpec(rawbits, 0, 16, "AES");
