@@ -3,11 +3,13 @@ package semana8;
 /**
  * Created by jorge on 13-11-2015.
  */
-import java.net.*;
-import java.io.*;
-import java.security.AlgorithmParameterGenerator;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
-public class nBob {
+public class Bobs8 {
 
     static public void main(String []args) {
 
@@ -17,8 +19,6 @@ public class nBob {
             ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
 
-            AlgorithmParameterGenerator algDH = AlgorithmParameterGenerator.getInstance("DH");
-            algDH.init(1024);
 
             String test;
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
