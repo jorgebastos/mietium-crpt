@@ -1,5 +1,7 @@
 package semana12;
 
+import sun.security.x509.X500Name;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
@@ -46,8 +48,8 @@ public class Alices12 extends Thread {
 
             FileInputStream fis = new FileInputStream("Servidor.p12");
             keystore.getInstance("PKCS12");
-            keystore.load(fis,"1234".toCharArray());
-            PrivateKey aliceprivkey = (PrivateKey) keystore.getKey("Servidor","1234".toCharArray());
+            keystore.load(fis, "1234".toCharArray());
+            PrivateKey aliceprivkey = (PrivateKey) keystore.getKey("Servidor", "1234".toCharArray());
 
             //cria e inicializa o gerador de par de chaves DH
             KeyPairGenerator a_kpg = KeyPairGenerator.getInstance("DH");
@@ -63,9 +65,8 @@ public class Alices12 extends Thread {
             byte[] bobsign = (byte[]) ois.readObject(); //recebe a assinatura e o certificado do bob
             CertPath bobcert = (CertPath) ois.readObject();
 
-            //TODO:verificar o certificado (done)
+            //verificar o certificado (done)
             validateCert(bobcert);
-
 
             X509Certificate bc = (X509Certificate) bobcert.getCertificates().get(0);
             PublicKey bobpubkey = bc.getPublicKey();
@@ -74,9 +75,10 @@ public class Alices12 extends Thread {
             sign.update(a_PK.getEncoded());
             sign.update(b_PK.getEncoded());
 
-            //Todo: verificar a autenticidade
+            //verificar a entidade (done)
+            X500Name x500name = new X500Name(bc.getSubjectX500Principal().getName());
 
-            if (sign.verify(bobsign)) {
+            if (sign.verify(bobsign) && x500name.getCommonName().startsWith("Cliente")) { //garante assinatura e entidade confiável.
                 sign.initSign(aliceprivkey);
                 sign.update(a_PK.getEncoded());
                 sign.update(b_PK.getEncoded());
@@ -135,7 +137,7 @@ public class Alices12 extends Thread {
                     if (oos != null) oos.close();
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

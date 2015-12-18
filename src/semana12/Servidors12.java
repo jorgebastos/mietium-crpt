@@ -44,28 +44,28 @@ public class Servidors12 {
     }
 
     public static void validateCert(CertPath cp) throws FileNotFoundException, CertificateException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, CertPathValidatorException {
-            CertificateFactory factory = CertificateFactory.getInstance("X.509");
-            Certificate cacert = factory.generateCertificate(new FileInputStream("CA.cer"));
-            CertPathValidator cpv = CertPathValidator.getInstance("PKIX");
-            TrustAnchor anchor = new TrustAnchor((X509Certificate) cacert, null);
-            // TrustAnchor representa os pressupostos de confiança que se aceita como válidos
-            // (neste caso, unicamente a CA que emitiu os certificados)
-            PKIXParameters params = new PKIXParameters(Collections.singleton(anchor));
-            // ...no nosso caso, vamos simplesmente desactivar a verificação das CRLs
-            params.setRevocationEnabled(false);
-            // Validacao
-            CertPathValidatorResult cpvResult = cpv.validate(cp, params);
-            try {
-                cpvResult = cpv.validate(cp, params);
-                System.out.println("SE CHEGOU AQUI, TUDO DEVE TER CORRIDO BEM!!!");
-            } catch (InvalidAlgorithmParameterException iape) {
-                System.err.println("Erro de validação: " + iape);
-                System.exit(1);
-            } catch (CertPathValidatorException cpve) {
-                System.err.println("FALHA NA VALIDAÇÃO: " + cpve);
-                System.err.println("Posição do certificado causador do erro: "
-                        + cpve.getIndex());
-            }
+        CertificateFactory factory = CertificateFactory.getInstance("X.509");
+        Certificate cacert = factory.generateCertificate(new FileInputStream("CA.cer"));
+        CertPathValidator cpv = CertPathValidator.getInstance("PKIX");
+        TrustAnchor anchor = new TrustAnchor((X509Certificate) cacert, null);
+        // TrustAnchor representa os pressupostos de confiança que se aceita como válidos
+        // (neste caso, unicamente a CA que emitiu os certificados)
+        PKIXParameters params = new PKIXParameters(Collections.singleton(anchor));
+        // ...no nosso caso, vamos simplesmente desactivar a verificação das CRLs
+        params.setRevocationEnabled(false);
+        // Validacao
+        CertPathValidatorResult cpvResult = cpv.validate(cp, params);
+        try {
+            cpvResult = cpv.validate(cp, params);
+            System.out.println("SE CHEGOU AQUI, TUDO DEVE TER CORRIDO BEM!!!");
+        } catch (InvalidAlgorithmParameterException iape) {
+            System.err.println("Erro de validação: " + iape);
+            System.exit(1);
+        } catch (CertPathValidatorException cpve) {
+            System.err.println("FALHA NA VALIDAÇÃO: " + cpve);
+            System.err.println("Posição do certificado causador do erro: "
+                    + cpve.getIndex());
+        }
     }
 }
 

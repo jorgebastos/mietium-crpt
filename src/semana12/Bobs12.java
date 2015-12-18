@@ -1,5 +1,7 @@
 package semana12;
 
+import sun.security.x509.X500Name;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.Mac;
@@ -24,6 +26,7 @@ public class Bobs12 {
     static final String CIPHER_MODE = "AES/CTR/NoPadding";
     static final String SIGNATURE = "SHA1withDSA";
     static KeyStore keystore;
+
     static public void main(String[] args) throws Exception {
         try {
 
@@ -36,7 +39,7 @@ public class Bobs12 {
 
             FileInputStream fis = new FileInputStream("Cliente.p12");
             keystore.getInstance("PKCS12");
-            keystore.load(fis,"1234".toCharArray());
+            keystore.load(fis, "1234".toCharArray());
 
             PrivateKey bobprivkey = (PrivateKey) keystore.getKey("Cliente1", "1234".toCharArray());
 
@@ -69,7 +72,7 @@ public class Bobs12 {
             CertPath alicecert = (CertPath) ois.readObject();
 
 
-            //TODO: Verificar o certificado!!!
+            //Verificar o certificado!!! (done)
             validateCert(alicecert);
 
             //le chave publica da licinha do certificado
@@ -80,9 +83,10 @@ public class Bobs12 {
             sign.update(a_PK.getEncoded());
             sign.update(b_PK.getEncoded());
 
-            //TODO: verificar o nome que está no certificado para garantir autenticidade
+            // verificar o nome que está no certificado para garantir se a identidade é condiavel (done)
+            X500Name x500name = new X500Name(ac.getSubjectX500Principal().getName());
 
-            if (sign.verify(alicesign)) {
+            if (sign.verify(alicesign) && x500name.getCommonName().startsWith("Servidor")) {
 
                 KeyAgreement b_kagree = KeyAgreement.getInstance("DH");
                 b_kagree.init(b_kp.getPrivate());
@@ -121,7 +125,7 @@ public class Bobs12 {
                 System.out.println("assinatura nao verificada");
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
