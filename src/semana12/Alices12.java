@@ -18,10 +18,12 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
+import static semana12.Servidors12.validateCert;
+
 /**
  * Created by jorge on 11-12-2015.
  */
-public class Alices12 {
+public class Alices12 extends Thread {
     private int ct;
     protected Socket s;
     private static DHParameterSpec dhSpec;
@@ -61,7 +63,9 @@ public class Alices12 {
             byte[] bobsign = (byte[]) ois.readObject(); //recebe a assinatura e o certificado do bob
             CertPath bobcert = (CertPath) ois.readObject();
 
-            //TODO:verificar o certificado
+            //TODO:verificar o certificado (done)
+            validateCert(bobcert);
+
 
             X509Certificate bc = (X509Certificate) bobcert.getCertificates().get(0);
             PublicKey bobpubkey = bc.getPublicKey();

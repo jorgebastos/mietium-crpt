@@ -15,6 +15,8 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
+import static semana12.Servidors12.validateCert;
+
 /**
  * Created by jorge on 13-12-2015.
  */
@@ -68,6 +70,7 @@ public class Bobs12 {
 
 
             //TODO: Verificar o certificado!!!
+            validateCert(alicecert);
 
             //le chave publica da licinha do certificado
             X509Certificate ac = (X509Certificate) alicecert.getCertificates().get(0);
